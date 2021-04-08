@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.net.Uri
 import android.provider.MediaStore
@@ -50,7 +51,9 @@ abstract class PhotoRequest(
 
     override fun activityResult(attachedObject: Activity, data: Intent?) {
         val contentResolver = attachedObject.application.contentResolver
-        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mCurrentPhotoPath)
+//        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mCurrentPhotoPath)
+        val source = ImageDecoder.createSource(contentResolver, mCurrentPhotoPath)
+        val bitmap = ImageDecoder.decodeBitmap(source)
         val rotationInputStream = contentResolver.openInputStream(mCurrentPhotoPath)
         //TODO check for null
         val angle = getRotationAngle(rotationInputStream)
