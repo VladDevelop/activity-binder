@@ -51,9 +51,9 @@ abstract class PhotoRequest(
 
     override fun activityResult(attachedObject: Activity, data: Intent?) {
         val contentResolver = attachedObject.application.contentResolver
-//        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mCurrentPhotoPath)
-        val source = ImageDecoder.createSource(contentResolver, mCurrentPhotoPath)
-        val bitmap = ImageDecoder.decodeBitmap(source)
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mCurrentPhotoPath)
+//        val source = ImageDecoder.createSource(contentResolver, mCurrentPhotoPath)
+//        val bitmap = ImageDecoder.decodeBitmap(source)
         val rotationInputStream = contentResolver.openInputStream(mCurrentPhotoPath)
         //TODO check for null
         val angle = getRotationAngle(rotationInputStream)
